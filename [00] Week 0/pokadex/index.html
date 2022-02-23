@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+      <link type="text/css" rel="stylesheet" href="css/style.css" />
+      <link type="text/css" rel="stylesheet" href="css/modal.css" />
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   </head>
+   <body>
+      <header>
+         <nav>
+            <div class="nav-wrapper">
+               <a href="#" class=brand-logo>PokemonApp</a>
+               <ul id="nav-mobile" class="right hide-on-med-and-down ulistPoks">
+                  <li><a href="#">First</a></li>
+                  <li><a href="#">Second</a></li>
+                  <li><a href="#">Third</a></li>
+                  </li>
+               </ul>
+            </div>
+         </nav>
+         <form role="search" id="form">
+            <input type="search" id="query" name="q"
+               placeholder="Search..."
+               aria-label="Search through site content">
+            <button>
+               <svg viewBox="0 0 1024 1024">
+                  <path class="path1" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
+               </svg>
+            </button>
+         </form>
+      </header>
+      <main>
+         <div class="pokemonGrid">
+            <ol id = 'pokemonList'>
+            </ol>
+         </div>
+         <div class="modal" id ="pokemonModel">
+         <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="pokemonDetail">
+               <img src= "https://static.independent.co.uk/2021/12/07/10/PRI213893584.jpg?quality=75&width=990&auto=webp&crop=982:726,smart" class ="image">
+               <p class= "pokoname"> some dummy text</p>
+               <hr>
+               <p class = "title"> Type(s)</p>
+               <div class ="flexc" >
+                  <p class = "type">hi </p>
+                  <p class = "type">hi2 </p>
+               </div>
+               <hr>
+               </div class = "stats">
+               <p class = "title">Stats</p>
+               <progress id="file" value="32" max="100"> 32% </progress>
+               <progress id="file" value="32" max="100"> 32% </progress>
+               <progress id="file" value="32" max="100"> 32% </progress>
+               <progress id="file" value="32" max="100"> 32% </progress>
+               <progress id="file" value="32" max="100"> 32% </progress>
+               <div class=" moves" >
+                  <hr>
+                  <ul class="moveslist" >
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                     <li>element1</li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </main>
+      <footer></footer>
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script src="index.js"></script>
+   </body>
+</html>

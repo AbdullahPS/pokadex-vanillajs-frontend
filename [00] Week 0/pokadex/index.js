@@ -1,11 +1,11 @@
 
 const pokemonContainer=document.getElementById('pokemonList');
-
 const modal = document.getElementById('pokemonModel');
-
-
 // Get the <span> element that closes the modal
 const span = document.getElementById("close");
+
+const form = document.getElementById('form');
+const query = document.getElementById('query');
 
 
 // When the user clicks on <span> (x), close the modal
@@ -19,9 +19,8 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-console.log(pokemonContainer)
 const pickThirtyRandom = ()=>{
-    // pick 30 pokemons randomly (1 to 50 )
+    // pick 30 pokemons randomly (1 to 150 )
     let randomPicks = [];            //declare a set in order to pick 30 unique random numbers
     while (randomPicks.length<30){
         let r = Math.floor(Math.random() * 149) + 1;    //get random numbers from 1 to 150 
@@ -38,47 +37,35 @@ const createPokemon =(pokemonarray)=>{
           return  `
           <li class ="pokcard" id="pok${element.id}">
           <div class ="pokcardForClick" onClick="showPopUp(${element.id})">
-            <p> ID :${element.id}</p>
-            <img src="${element.image}" class ="card-image">
-            <p>Name : ${element.name}</p>
-            <p>Type :${element.type}</p>
-            </div>
-
-            <div class="switch" id="switch${element.id}">
-              <label>
-                <input type="checkbox"  onChange="onCheckBoxChange(${element.id}) "    ${(() => { 
-
-
-                    return  isCaptured(element.id)? `
-                            checked="true"
-                 ` : ``;
-              
-                 
-                  })()} >
-                <span class="lever"></span>
-                </label>
-                <p style="display:inline;">Captured 
-                
-            
-                
-                </p> 
-            </div>
-
-            </label>
-        </li>
+             <p> ID :${element.id}</p>
+             <img src="${element.image}" class ="card-image">
+             <p>Name : ${element.name}</p>
+             <p>Type :${element.type}</p>
+          </div>
+          <div class="switch" id="switch${element.id}">
+             <label>
+             <input type="checkbox"  onChange="onCheckBoxChange(${element.id}) "    ${(() => { 
+             return  isCaptured(element.id)? `
+             checked="true"
+             ` : ``;
+             })()} >
+             <span class="lever"></span>
+             </label>
+             <p style="display:inline;">Captured 
+             </p>
+          </div>
+          </label>
+       </li>
           
           `
 
 
        })
-      // console.log(pokemonElements)
        pokemonContainer.innerHTML=pokemonElements.join(" ");
 
 }
 const displayModal=(pokemondetails)=>{
-    console.log(pokemondetails);
 
-//were interested in image, name, stats, moves and types get them based on ID
 const htmltext=`
 <div class="modal-content">
 <span class="close" id="close" onClick="closeModal()">&times;</span>
@@ -92,7 +79,7 @@ const htmltext=`
 
 ${(() => { 
 
-
+    //check if Pokemon has 1 Type or more
    return  pokemondetails.type.length==1? `
     <p class = "type1">${ pokemondetails.type[0].type.name} </p>
 ` :
@@ -104,57 +91,36 @@ pokemondetails.type.map((el,index)=>
  })()}
 
 
-</div>
-
+ </div>
+ <hr>
+ </div class = "stats">
+ <p class = "title">Stats</p>
+ ${
+ (() => { 
+ return pokemondetails.stats.map(el=>
+ `
+ <div>
+    <label for="file">${el.stat.name}:</label>
+    <progress id="file" value="${el.base_stat}" max="100"> 32% </progress>
+ </div>
+ `
+ ).join(' ');
+ })()
+ }
+ <div class=" moves" >
     <hr>
-    </div class = "stats">
-    <p class = "title">Stats</p>
-
-    ${
-        (() => { 
-
-            return pokemondetails.stats.map(el=>
-                `
-                <div>
-            <label for="file">${el.stat.name}:</label>
-            <progress id="file" value="${el.base_stat}" max="100"> 32% </progress>
-            </div>
-            `
-                ).join(' ');
-         })()
-
-
-    }
-
-
-
-    <div class=" moves" >
-       <hr>
-       <ul class="moveslist" >
-
+    <ul class="moveslist" >
        ${(() => { 
-         return  pokemondetails.moves.map(
-               el=>`<li>${el.move.name}</li>`
-
-
-           ).join(' ');
-        
-        
-            
-        
-
-
-        })()}
-         
-
-
-
-
-       </ul>
-</div>
-</div>
+       return  pokemondetails.moves.map(
+       el=>`
+       <li>${el.move.name}</li>
+       `
+       ).join(' ');
+       })()}
+    </ul>
+ </div>
+ </div>
 `;
-console.log(htmltext)
 modal.innerHTML=htmltext;
 modal.style.display="block";
 }
@@ -182,7 +148,6 @@ const fetchPokemon = () => {
     }
     Promise.all(promises).then(data=>{
         let randomPick = pickThirtyRandom();
-        //console.log(randomPick)
        const pokemonarray=  randomPick.map(element=>({
             id:data[element-1].id,
             name:data[element-1].name,
@@ -199,28 +164,23 @@ const fetchPokemon = () => {
 
 
 
-fetchPokemon();
+ fetchPokemon();
 
 
-
-const f = document.getElementById('form');
-const q = document.getElementById('query');
-
-
-function submitted(event) {
+ const submitted=(event)=> {
   event.preventDefault();
-   console.log(q.value);
-   fetchPokByName(q.value);
+   console.log(query.value);
+   fetchPokByName(query.value);
 
 }
 
-f.addEventListener('submit', submitted);
+form.addEventListener('submit', submitted);
 
 const fetchPokByName = (name) => {
     const url =`https://pokeapi.co/api/v2/pokemon/${name}`;
   
         
-        fetch(url  ).then(response => response.json()) //returns another promise
+     fetch(url  ).then(response => response.json()) //returns another promise
         
     
     .then(data=>{console.log(data);
@@ -233,16 +193,6 @@ const fetchPokByName = (name) => {
         };
         console.log(pokemon);
         fetchPokByID(pokemon.id);
-    //    const pokemonarray=  randomPick.map(element=>({
-    //         id:data[element-1].id,
-    //         name:data[element-1].name,
-    //         image:data[element-1].sprites['front_default'],
-    //         type:data[element-1].types.map(el=>el.type.name).join()
-
-
-    //     }));
-    //     createPokemon(pokemonarray);     
-    // }
 
      } ).catch(err => {
         console.log(err);
@@ -254,7 +204,7 @@ const  fetchPokByID = (id) => {
     const url =`https://pokeapi.co/api/v2/pokemon/${id}`;
   
         
-        fetch(url  ).then(response => response.json()) //returns another promise
+    fetch(url  ).then(response => response.json()) //returns another promise
         
     
     .then(data=>{console.log(data);
@@ -281,13 +231,10 @@ const  fetchPokByID = (id) => {
 
 
 const onCheckBoxChange=(key)=>{
-    console.log('was changed');
     if (isCaptured(key)){
     localStorage.removeItem(key);
-    console.log('am at if')
     }
     else{
-        console.log('am at else')
     capturePokemon(key);}
 
 }
