@@ -137,7 +137,7 @@ const showPopUp =(id)=>{
 
 const fetchPokemon = () => {
     //const url = (i)=>`https://pokeapi.co/api/v2/pokemon/${i}`;
-    const url =(i)=> `http://pokadex-api2.herokuapp.com/pokemon/pokadex/${i}`
+    const url =(i)=> `https://pokadex-api2.herokuapp.com/pokemon/pokadex/${i}`
 
     const pokNums=150;
     let promises =[];
