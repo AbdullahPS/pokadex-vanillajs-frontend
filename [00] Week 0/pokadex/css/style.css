@@ -12,21 +12,24 @@
   border-radius: 75%;
 }
 body {
-  background-color: aquamarine;
+  background-color: rgb(255, 127, 197);
 }
 #pokemonList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  list-style: none;
 }
 
 form {
-  background-color: #4654e1;
-  width: 300px;
+  background-color: #555;
   height: 44px;
   border-radius: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin: auto;
+  margin-top: 5%;
+  width: 75%;
 }
 
 input {
@@ -54,4 +57,12 @@ svg {
   width: 24px;
   height: 24px;
   padding: 10px;
+}
+
+.navBarUl {
+  background-color: #fff;
+  height: fit-content;
+}
+.navBarUl a {
+  color: black;
 }
