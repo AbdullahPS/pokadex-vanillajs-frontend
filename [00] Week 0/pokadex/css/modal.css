@@ -9,16 +9,16 @@
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 20% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 50%; /* Could be more or less, depending on screen size */
+  width: 40%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -47,17 +47,19 @@
 }
 .title {
   font-size: 10px;
+  text-align: center;
 }
 .type1 {
   margin: 2px;
   color: red;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid red;
+  font-size: smaller;
 }
 .type2 {
   margin: 2px;
   color: green;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid green;
 }
 .flexc {
@@ -67,10 +69,22 @@
 }
 .moveslist {
   display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  list-style: disc;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
+  font-size: smaller;
 }
-.progress2 {
-  width: 800px;
-  display: blockl;
+.progress {
+  display: block;
+  margin: auto;
+  max-width: 150px;
+  height: 10px;
+}
+.label {
+  text-align: center;
+  color: black;
+  padding: auto;
+}
+.pokemonDetail {
+  display: flex;
+  justify-content: center;
 }

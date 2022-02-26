@@ -1,5 +1,5 @@
-
-const pokemonContainer=document.getElementById('pokemonList');
+const pokemonContainer=document.getElementById('pokemonContainer')
+const pokemonList=document.getElementById('pokemonList');
 const modal = document.getElementById('pokemonModel');
 // Get the <span> element that closes the modal
 const span = document.getElementById("close");
@@ -62,22 +62,21 @@ const createPokemon =(pokemonarray)=>{
 
 
        })
-       pokemonContainer.innerHTML=pokemonElements.join(" ");
+       pokemonList.innerHTML=pokemonElements.join(" ");
 
 }
 const displayModal=(pokemondetails)=>{
 
  const htmltext= `
 <div class="modal-content">
-<span class="close" id="close" onClick="closeModal()">&times;</span>
-<div class="pokemonDetail">
-    <img src= "${pokemondetails.image}" class ="image">
-    <p class= "pokoname"> ${pokemondetails.name}</p>
-    <hr>
- <p class = "title"> Type(s)</p>
- <div class ="flexc" >
-
-
+   <span class="close" id="close" onClick="closeModal()">&times;</span>
+   <div class="pokemonDetail">
+      <img src= "${pokemondetails.image}" class ="image">
+      <p class= "pokoname"> ${pokemondetails.name}</p>
+   </div>
+   <hr>
+      <p class = "title"> Type(s)</p>
+    <div class ="flexc" >
 ${(() => { 
 
     //check if Pokemon has 1 Type or more
@@ -87,19 +86,21 @@ ${(() => {
 pokemondetails.type.map((el,index)=>
  ` <p class = "type${index+1}">${el} </p>
  `
- ).join(' ');
+         ).join(' ');
 
- })()}
+            })()}
 
+
+     </div>
+  <hr>
+
+ <div class = "stats" id ="divStats"> 
+ <p class = "title">Stats</p>
 
  </div>
- <hr>
-
- <p class = "title">Stats</p>
- <div class = "stats" id ="divStats"> </div>
  <div class=" moves" >
     <hr>
-    <ul class="moveslist"  >
+    <ol class="moveslist"  >
        ${(() => { 
        return  pokemondetails.moves.map(
        el=>`
@@ -107,7 +108,7 @@ pokemondetails.type.map((el,index)=>
        `
        ).join(' ');
        })()}
-    </ul>
+    </ol>
  </div>
  </div>
 `;
@@ -133,16 +134,10 @@ const showPopUp =(id)=>{
 
 ///WIP
 }
-document.getElementById("nav-mobile").addEventListener("click",function(e) {
-    if (e.target.nodeName === 'li')
-    console.log('Responding')      
-  });
-
-
 
 const fetchPokemon = () => {
     //const url = (i)=>`https://pokeapi.co/api/v2/pokemon/${i}`;
-    const url =(i)=> `https://pokadex-api2.herokuapp.com/pokemon/pokadex/${i}`
+    const url =(i)=> `http://pokadex-api2.herokuapp.com/pokemon/pokadex/${i}`
 
     const pokNums=150;
     let promises =[];
@@ -175,11 +170,6 @@ const fetchPokemon = () => {
 };
 
 
-/*
-    const urlImage=(i)=>`https://pokadex-api2.herokuapp.com/pokemon/images/${i}`
-    const urlMoves=(i)=>`https://pokadex-api2.herokuapp.com/pokemon/moves/${i}`
-*/
-
 const getPokemonsImages=()=>{
 
 //get all ids from current pokemons on the screen
@@ -205,7 +195,6 @@ Promise.all(promises).then(response=>console.log(response)
 
 
  fetchPokemon();
- //fetchPokemonMyApi();
 
 
  const submitted=(event)=> {
@@ -281,8 +270,10 @@ const fillStats =(id) =>{
 .then(data=>{
      const pokemonStats=Object.entries(data[0].base).map(([key, value]) =>`
          <div>
-       <label for="file">${key}:</label>
-       <progress id="file" value="${value}" max="100"> 32% </progress>
+         <div class="label">
+         <label for="file" class="label">${key}:</label>    </div>
+
+       <progress id="file" value="${value}" max="100" class ="progress"> <h1>${value}</h1> </progress>
     </div>
          `
 
